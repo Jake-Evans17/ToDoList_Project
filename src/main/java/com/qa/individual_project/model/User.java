@@ -1,16 +1,10 @@
 package com.qa.individual_project.model;
 
-import java.sql.SQLException;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
 
 @Entity
 public class User {
@@ -23,16 +17,10 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 	
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-	private Set<Category> categories;
-	
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-	private Set<Task> tasks;
-	
 	public User() {
 	}
 	
-	public User(String username, String password) throws SQLException {
+	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}

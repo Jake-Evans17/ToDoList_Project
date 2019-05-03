@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Task {
@@ -24,16 +22,8 @@ public class Task {
 	private String dateTarget;
 	private String priority;
 	private boolean complete;
-	//private int userId;
-	//private int categoryId;
-	
-	@ManyToOne
-	@JoinColumn (name = "userId")
-	private User user;
-	
-	@ManyToOne
-	@JoinColumn (name = "categoryId")
-	private Category category;
+	private int userId;
+	private int categoryId;
 	
 	public Task() {
 	}
@@ -44,7 +34,6 @@ public class Task {
         LocalDate localDate = LocalDate.now();
         this.dateSet = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(localDate);
         this.complete = false;
-		//this.userId = userId;
 	}
 	
 	public int getId() {
@@ -85,22 +74,22 @@ public class Task {
 	public void setPriority(String priority) {
 		this.priority = priority;
 	}
-	public boolean isComplete() {
+	public boolean getComplete() {
 		return complete;
 	}
 	public void setComplete(boolean complete) {
 		this.complete = complete;
 	}
-	//public int getUserId() {
-	//	return userId;
-	//}
-	//public void setUserId(int userId) {
-	//	this.userId = userId;
-//	}
-	//public int getCategoryId() {
-	//	return categoryId;
-	//}
-	//public void setCategoryId(int categoryId) {
-	//	this.categoryId = categoryId;
-	//}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public int getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
 }

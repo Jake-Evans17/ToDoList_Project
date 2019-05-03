@@ -1,16 +1,10 @@
 package com.qa.individual_project.model;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Category {
@@ -20,14 +14,7 @@ public class Category {
 	private int id;
 	@Column(nullable = false)
 	private String name;
-	//private int userId;
-	
-	@ManyToOne
-	@JoinColumn (name = "userId")
-	private User user;
-	
-	@OneToMany(mappedBy="category", cascade = CascadeType.ALL)
-	private Set<Task> tasks;
+	private int userId;
 
 	public Category() {
 	}
@@ -35,7 +22,6 @@ public class Category {
 	public Category(int id, String name, int userId) {
 		this.id = id;
 		this.name = name;
-		//this.userId = userId;
 	}
 
 	public int getId() {
@@ -54,11 +40,11 @@ public class Category {
 		this.name = name;
 	}
 
-	//public int getUserId() {
-	//	return userId;
-	//}
+	public int getUserId() {
+		return userId;
+	}
 
-	//public void setUserId(int userId) {
-	//	this.userId = userId;
-	//}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 }

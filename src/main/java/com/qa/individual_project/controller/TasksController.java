@@ -1,5 +1,7 @@
 package com.qa.individual_project.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -27,6 +29,8 @@ public class TasksController {
 
 	@RequestMapping(value = "tasks", method = RequestMethod.POST)
     public Task create(@RequestBody Task task){
+        LocalDate localDate = LocalDate.now();
+        task.setDateSet(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(localDate));
         return tasksRepository.saveAndFlush(task);
     }
 
@@ -47,5 +51,10 @@ public class TasksController {
         Task existingTask = tasksRepository.findOne(id);
         tasksRepository.delete(existingTask);
         return existingTask;
+    }
+	
+	@RequestMapping(value = "tasks//{complete}", method = RequestMethod.GET)
+    public List<Task> findByComplete(@PathVariable boolean complete){
+        return tasksRepository.findByComplete(complete);
     }
 }

@@ -57,4 +57,14 @@ public class TasksController {
     public List<Task> findByComplete(@PathVariable boolean complete){
         return tasksRepository.findByComplete(complete);
     }
+	
+	@RequestMapping(value = "tasks/userId/{userId}", method = RequestMethod.GET)
+    public List<Task> findByUserId(@PathVariable int userId){
+        return tasksRepository.findByUserId(userId);
+    }
+	
+	@RequestMapping(value = "tasks/userId/{userId}/{complete}", method = RequestMethod.GET)
+    public List<Task> findByUserIdAndComplete(@PathVariable int userId, @PathVariable boolean complete){
+        return tasksRepository.findByUserIdAndComplete(userId, complete);
+    }
 }

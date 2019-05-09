@@ -16,37 +16,55 @@ import com.qa.individual_project.repository.UsersRepository;
 @RestController
 @RequestMapping("api/v1/")
 public class UsersController {
-	
+
 	@Autowired
 	private UsersRepository usersRepository;
-	
+
 	@RequestMapping(value = "users", method = RequestMethod.GET)
-    public List<User> list(){
-        return usersRepository.findAll();
-    }
+	public List<User> list() {
+		return usersRepository.findAll();
+	}
 
 	@RequestMapping(value = "users", method = RequestMethod.POST)
-    public User create(@RequestBody User user){
-        return usersRepository.saveAndFlush(user);
-    }
+	public User create(@RequestBody User user) {
+		return usersRepository.saveAndFlush(user);
+	}
 
 	@RequestMapping(value = "users/{id}", method = RequestMethod.GET)
-    public User get(@PathVariable int id){
-        return usersRepository.findOne(id);
-    }
+	public User get(@PathVariable int id) {
+		return usersRepository.findOne(id);
+	}
 
 	@RequestMapping(value = "users/{id}", method = RequestMethod.PUT)
-    public User update(@PathVariable int id, @RequestBody User user){
-        User existingUser = usersRepository.findOne(id);
-        BeanUtils.copyProperties(user, existingUser);
-        return usersRepository.saveAndFlush(user);
-    }
+	public User update(@PathVariable int id, @RequestBody User user) {
+		User existingUser = usersRepository.findOne(id);
+		BeanUtils.copyProperties(user, existingUser);
+		return usersRepository.saveAndFlush(user);
+	}
 
 	@RequestMapping(value = "users/{id}", method = RequestMethod.DELETE)
-    public User delete(@PathVariable int id){
-        User existingUser = usersRepository.findOne(id);
-        usersRepository.delete(existingUser);
-        return existingUser;
-    }
+	public User delete(@PathVariable int id) {
+		User existingUser = usersRepository.findOne(id);
+		usersRepository.delete(existingUser);
+		return existingUser;
+	}
 
+	@RequestMapping(value = "users/login", method = RequestMethod.POST)
+	public int login(@RequestBody User user) {
+		List<User> userlist = usersRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		if (userlist.isEmpty()) {
+			return -1;
+		} else {
+			return userlist.get(0).getId();
+		}
+	}
+
+	@RequestMapping(value = "users/username/{username}", method = RequestMethod.GET)
+	public int findByUsername(@PathVariable String username) {
+		try {
+			return usersRepository.findByUsername(username).getId();
+		} catch (Exception e) {
+			return -1;
+		}
+	}
 }

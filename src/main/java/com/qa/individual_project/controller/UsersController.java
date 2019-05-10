@@ -49,13 +49,12 @@ public class UsersController {
 		return existingUser;
 	}
 
-	@RequestMapping(value = "users/login", method = RequestMethod.POST)
-	public int login(@RequestBody User user) {
-		List<User> userlist = usersRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-		if (userlist.isEmpty()) {
+	@RequestMapping(value = "users/{username}/{password}", method = RequestMethod.GET)
+	public int findByUsernameAndPassword(@PathVariable String username, @PathVariable String password) {
+		try {
+			return usersRepository.findByUsernameAndPassword(username, password).getId();
+		} catch (Exception e) {
 			return -1;
-		} else {
-			return userlist.get(0).getId();
 		}
 	}
 

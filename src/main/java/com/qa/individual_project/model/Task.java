@@ -28,7 +28,7 @@ public class Task {
 	public Task() {
 	}
 	
-	public Task(int id, String name, int userId) {
+	public Task(int id, String name) {
 		this.id = id;
 		this.name = name;
         LocalDate localDate = LocalDate.now();

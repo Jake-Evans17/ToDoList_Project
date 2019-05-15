@@ -14,7 +14,7 @@ import com.qa.individual_project.model.Category;
 import com.qa.individual_project.repository.CategoriesRepository;
 
 @RestController
-@RequestMapping("api/v1/")
+@RequestMapping("/api/v1/")
 public class CategoriesController {
 	
 	@Autowired

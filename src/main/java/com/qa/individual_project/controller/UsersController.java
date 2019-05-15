@@ -14,7 +14,7 @@ import com.qa.individual_project.model.User;
 import com.qa.individual_project.repository.UsersRepository;
 
 @RestController
-@RequestMapping("api/v1/")
+@RequestMapping("/api/v1/")
 public class UsersController {
 
 	@Autowired

@@ -16,7 +16,7 @@ import com.qa.individual_project.model.Task;
 import com.qa.individual_project.repository.TasksRepository;
 
 @RestController
-@RequestMapping("api/v1/")
+@RequestMapping("/api/v1/")
 public class TasksController {
 	
 	@Autowired

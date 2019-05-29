@@ -1,5 +1,5 @@
 #!/bin/bash
-until nc -z db-con 3306; do
+until nc -z ${mysql_ip} 3306; do
 	echo "Waiting on the DB to ready"
 	sleep 1
 done
